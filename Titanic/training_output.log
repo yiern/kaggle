@@ -1,0 +1,60 @@
+2026-02-05 15:28:59 - __main__ - INFO - ============================================================
+2026-02-05 15:28:59 - __main__ - INFO - TRAINING XGBOOST MODEL FOR TITANIC
+2026-02-05 15:28:59 - __main__ - INFO - ============================================================
+2026-02-05 15:28:59 - __main__ - INFO - Loading and preprocessing data...
+2026-02-05 15:28:59 - __main__ - INFO - Training samples: 891
+2026-02-05 15:28:59 - __main__ - INFO - Test samples: 418
+2026-02-05 15:28:59 - __main__ - INFO - Features: ['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked', 'HasCabin', 'Title', 'FamilySize', 'IsAlone', 'FarePerPerson']
+2026-02-05 15:28:59 - __main__ - INFO - Feature count: 12
+2026-02-05 15:28:59 - __main__ - INFO - 
+Train set: 712 samples
+2026-02-05 15:28:59 - __main__ - INFO - Validation set: 179 samples
+2026-02-05 15:28:59 - __main__ - INFO - Test set: 418 samples
+2026-02-05 15:28:59 - __main__ - INFO - 
+============================================================
+2026-02-05 15:28:59 - __main__ - INFO - STEP 1: 10-FOLD CROSS-VALIDATION (Baseline)
+2026-02-05 15:28:59 - __main__ - INFO - ============================================================
+2026-02-05 15:28:59 - models.xgboost_model - INFO - XGBoostTitanic initialized with 20 early stopping rounds
+2026-02-05 15:28:59 - evaluation.metrics - INFO - Performing 10-fold stratified cross-validation...
+Traceback (most recent call last):
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/.venv/lib/python3.13/site-packages/sklearn/utils/_tags.py", line 275, in get_tags
+    tags = estimator.__sklearn_tags__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'XGBoostTitanic' object has no attribute '__sklearn_tags__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/main.py", line 398, in <module>
+    main()
+    ~~~~^^
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/main.py", line 383, in main
+    train_model()
+    ~~~~~~~~~~~^^
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/main.py", line 128, in train_model
+    cv_results = cross_validate(
+        baseline_model, X_train, y_train, cv_folds=CV_FOLDS, random_state=RANDOM_STATE
+    )
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/src/evaluation/metrics.py", line 53, in cross_validate
+    scores = cross_val_score(model, X, y, cv=skf, scoring="accuracy", n_jobs=-1)
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/.venv/lib/python3.13/site-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/.venv/lib/python3.13/site-packages/sklearn/model_selection/_validation.py", line 651, in cross_val_score
+    cv_results = cross_validate(
+        estimator=estimator,
+    ...<9 lines>...
+        error_score=error_score,
+    )
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/.venv/lib/python3.13/site-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/.venv/lib/python3.13/site-packages/sklearn/model_selection/_validation.py", line 320, in cross_validate
+    cv = check_cv(cv, y, classifier=is_classifier(estimator))
+                                    ~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/.venv/lib/python3.13/site-packages/sklearn/base.py", line 1211, in is_classifier
+    return get_tags(estimator).estimator_type == "classifier"
+           ~~~~~~~~^^^^^^^^^^^
+  File "/Users/ernyi/Documents/personal projects/kaggle/Titanic/.venv/lib/python3.13/site-packages/sklearn/utils/_tags.py", line 283, in get_tags
+    raise AttributeError(
+    ...<8 lines>...
+    )
+AttributeError: The following error was raised: 'XGBoostTitanic' object has no attribute '__sklearn_tags__'. It seems that there are no classes that implement `__sklearn_tags__` in the MRO and/or all classes in the MRO call `super().__sklearn_tags__()`. Make sure to inherit from `BaseEstimator` which implements `__sklearn_tags__` (or alternatively define `__sklearn_tags__` but we don't recommend this approach). Note that `BaseEstimator` needs to be on the right side of other Mixins in the inheritance order.
